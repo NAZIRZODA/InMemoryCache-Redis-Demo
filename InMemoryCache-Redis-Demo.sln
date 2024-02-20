@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemoryCache-Redis-Demo", "InMemoryCache-Redis-Demo\InMemoryCache-Redis-Demo.csproj", "{83373F80-BA42-4C3D-8328-7678565028D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InMemoryCacheDemo", "InMemoryCacheDemo\InMemoryCacheDemo.csproj", "{83373F80-BA42-4C3D-8328-7678565028D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
