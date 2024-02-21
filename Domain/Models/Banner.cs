@@ -1,4 +1,4 @@
-namespace InMemoryCache_Redis_Demo.Models;
+namespace Domain.Models;
 
 public class Banner
 {
