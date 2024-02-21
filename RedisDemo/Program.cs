@@ -1,7 +1,6 @@
-using RedisDemo.Cache;
 using RedisDemo.Services;
-using StackExchange.Redis;
 using StackExchange.Redis.Extensions.Core.Configuration;
+using StackExchange.Redis.Extensions.Newtonsoft;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,26 +14,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IRedisBannerService, RedisBannerService>();
 builder.Services.AddScoped<ICacheService, RedisCacheService>();
 
-var redisCacheOptions = builder.Configuration.GetSection("RedisCache").Get<RedisCacheOptions>();
-builder.Services.AddSingleton<IConnectionMultiplexer>(provider =>
+builder.Services.Configure<RedisConfiguration>(builder.Configuration.GetSection("RedisCache"));
+builder.Services.AddStackExchangeRedisExtensions<NewtonsoftSerializer>(_ => new[]
 {
-    var config = new ConfigurationOptions
-    {
-        Password = redisCacheOptions!.Password,
-        AbortOnConnectFail = false,
-        ConnectTimeout = redisCacheOptions.ConnectTimeout,
-        Ssl = redisCacheOptions.Ssl,
-        AllowAdmin = redisCacheOptions.AllowAdmin
-    };
-
-    foreach (var host in redisCacheOptions.Hosts)
-    {
-        config.EndPoints.Add(host.Host, host.Port);
-    }
-
-    return ConnectionMultiplexer.Connect(config);
+    builder.Configuration.GetSection("RedisCache").Get<RedisConfiguration>()!
 });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

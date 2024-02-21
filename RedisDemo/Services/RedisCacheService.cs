@@ -1,5 +1,6 @@
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using StackExchange.Redis.Extensions.Core.Abstractions;
 
 namespace RedisDemo.Services;
 
@@ -7,9 +8,9 @@ public class RedisCacheService : ICacheService
 {
     private readonly IDatabase _db;
 
-    public RedisCacheService(IConnectionMultiplexer connectionMultiplexer)
+    public RedisCacheService(IRedisClientFactory redisClientFactory)
     {
-        _db = connectionMultiplexer.GetDatabase();
+        _db = redisClientFactory.GetRedisClient("RedisCache").GetDefaultDatabase().Database;
     }
 
     public async Task<T?> GetAsync<T>(string key)
