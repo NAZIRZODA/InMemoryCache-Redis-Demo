@@ -1,4 +1,4 @@
-using InMemoryCache_Redis_Demo.Models;
+using Domain.Models;
 using InMemoryCache_Redis_Demo.Services;
 using Microsoft.AspNetCore.Mvc;
 
